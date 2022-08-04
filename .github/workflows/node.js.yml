@@ -29,7 +29,7 @@ jobs:
         run: docker login --username '${{secrets.DOCKER_USERNAME}}' --password '${{secrets.DOCKER_PASSWORD}}'
 
       - name: tag docker image
-        run: docker tag purbo75:'${{github.sha}}' '${{secrets.DOCKER_USERNAME}}'/management:'${{github.sha}}'
+        run: docker tag management:'${{github.sha}}' '${{secrets.DOCKER_USERNAME}}'/management:'${{github.sha}}'
 
       - name: push docker image
         run: docker push '${{secrets.DOCKER_USERNAME}}'/management:'${{github.sha}}'
