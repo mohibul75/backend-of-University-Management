@@ -31,7 +31,7 @@ jobs:
       # docker build and push
       - uses: mr-smithers-excellent/docker-build-push@v5
         with:
-          image: ${{secrets.DOCKER_USERNAME}}/backend_of_university_management:${{github.sha}}
+          image: ${{secrets.DOCKER_USERNAME}}/backend_of_university_management:latest
           registry: docker.io
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
@@ -60,6 +60,6 @@ jobs:
             k8s/backend-deployment.yml
             k8s/backend-service.yml
             k8s/ingress-service.yml
-          images: ${{secrets.DOCKER_USERNAME}}/backend_of_university_management:${{github.sha}}
+          images: ${{secrets.DOCKER_USERNAME}}/backend_of_university_management:latest
           imagepullsecrets: docker-image-pull-secret
           action: deploy
