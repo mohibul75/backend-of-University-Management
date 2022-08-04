@@ -8,6 +8,7 @@ const StudentSchema = new mongoose.Schema(
         year: { type: Number, required: true },
         course: [
             {
+                grade: "NAN",
                 approval: {
                     type: Boolean,
                 },
