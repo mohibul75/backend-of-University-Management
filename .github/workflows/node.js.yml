@@ -58,7 +58,7 @@ jobs:
         uses: Azure/k8s-deploy@v1
         with:
           manifests: |
-            k8s/ns-dev.yml
+
             k8s/backend-deployment.yml
             k8s/backend-service.yml
           images: "${{secrets.DOCKER_LOGIN}}/githubactions-aks-demo:${{github.sha}}"
