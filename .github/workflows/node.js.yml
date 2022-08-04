@@ -62,5 +62,6 @@ jobs:
             k8s/backend-service.yml
             k8s/ingress-service.yml
           images: ${{secrets.DOCKER_USERNAME}}/backend_of_university_management
+          tags: latest
           imagepullsecrets: docker-image-pull-secret
           action: deploy
