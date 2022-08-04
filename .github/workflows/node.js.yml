@@ -1,13 +1,13 @@
 name: AKS Deployment
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 jobs:
   build:
     runs-on: ubuntu-latest
-       strategy:
+    strategy:
       matrix:
         node-version: [12.x, 14.x]
 
@@ -21,23 +21,23 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
-    
+
       - name: docker build
         run: docker build -t management:'${{github.sha}}' .
-    
+
       - name: docker login
         run: docker login --username '${{secrets.DOCKER_USERNAME}}' --password '${{secrets.DOCKER_PASSWORD}}'
-      
+
       - name: tag docker image
         run: docker tag purbo75:'${{github.sha}}' '${{secrets.DOCKER_USERNAME}}'/management:'${{github.sha}}'
-    
+
       - name: push docker image
         run: docker push '${{secrets.DOCKER_USERNAME}}'/management:'${{github.sha}}'
-      
+
       - name: Azure Kubernetes set context
         uses: Azure/aks-set-context@v1
         with:
-          creds: '${{secrets.AZURE_CREDENTIALS}}'
+          creds: "${{secrets.AZURE_CREDENTIALS}}"
           resource-group: TEST
           cluster-name: testcluster
 
@@ -45,19 +45,19 @@ jobs:
         uses: Azure/k8s-create-secret@v1.1
         with:
           container-registry-url: https://index.docker.io/v1/
-          container-registry-username: '${{secrets.DOCKER_USERNAME}}'
-          container-registry-password:  '${{secrets.DOCKER_PASSWORD}}'
+          container-registry-username: "${{secrets.DOCKER_USERNAME}}"
+          container-registry-password: "${{secrets.DOCKER_PASSWORD}}"
           secret-type: docker-registry
           secret-name: docker-image-pull-secret
-        
+
       # Deploy to k8s cluster
-    - name: Deploy to Kubernetes cluster
-      uses: Azure/k8s-deploy@v1
-      with:        
-        manifests: |
-          k8s/backend-deployment.yml
-          k8s/backend-service.yml
-    
-        images: '${{secrets.DOCKER_USERNAME}}/management:${{github.sha}}'
-        imagepullsecrets: docker-image-pull-secret
-        action: deploy
+      - name: Deploy to Kubernetes cluster
+        uses: Azure/k8s-deploy@v1
+        with:
+          manifests: |
+            k8s/backend-deployment.yml
+            k8s/backend-service.yml
+
+          images: "${{secrets.DOCKER_USERNAME}}/management:${{github.sha}}"
+          imagepullsecrets: docker-image-pull-secret
+          action: deploy
