@@ -8,4 +8,4 @@ const CourseSchema = new mongoose.Schema(
     }, { timestamps: true }
 );
 
-module.exports = mongoose.model("Cources", CourseSchema);
+module.exports = mongoose.model("Cource", CourseSchema);
