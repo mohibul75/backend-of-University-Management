@@ -35,3 +35,31 @@ jobs:
           registry: docker.io
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - uses: Azure/aks-set-context@v1
+      with:
+        creds: '${{ secrets.AZURE_CREDENTIALS }}'
+        cluster-name: testcluster
+        resource-group: TEST
+
+  # Create K8s secrets to pull images
+    - name: Create secret in Kubernetes cluster
+      uses: Azure/k8s-create-secret@v1.1
+      with:
+        container-registry-url: https://hub.docker.com/repository/docker/purbo75/fest_backend
+        container-registry-username: '${{secrets.DOCKER_USERNAME}}'
+        container-registry-password:  '${{secrets.DOCKER_PASSWORD}}'
+        secret-type: docker-registry
+        secret-name: docker-image-pull-secret
+  
+        # Deploy to k8s cluster
+    - name: Deploy to Kubernetes cluster
+      uses: Azure/k8s-deploy@v1
+      with:        
+        manifests: |
+          k8s/ns-dev.yml
+          k8s/backend-deployment.yml
+          k8s/backend-service.yml
+        images: '${{secrets.DOCKER_LOGIN}}/githubactions-aks-demo:${{github.sha}}'
+        imagepullsecrets: docker-image-pull-secret
+        action: deploy
