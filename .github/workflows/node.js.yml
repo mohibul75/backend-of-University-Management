@@ -38,7 +38,7 @@ jobs:
 
       - uses: Azure/aks-set-context@v1
         with:
-          creds: "${{ secrets.AZURE_CREDENTIALS }}"
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
           cluster-name: testcluster
           resource-group: TEST
 
