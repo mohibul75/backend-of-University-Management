@@ -29,6 +29,7 @@ jobs:
       - run: npm run build --if-present
       - run: npm test
 
+      # docker build and push
       - uses: mr-smithers-excellent/docker-build-push@v5
         with:
           image: purbo75/fest_backend
