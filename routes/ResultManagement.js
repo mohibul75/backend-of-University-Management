@@ -1,4 +1,4 @@
-const Student = require("../models/Student");
+const Result = require("../models/Result");
 const {
     verifyToken,
     verifyTokenAndAuthorization,
@@ -8,50 +8,29 @@ const {
 const router = require("express").Router();
 
 //CREATE
-router.post("/addCourse", async (req, res) => {
-    const newStudent = new Student(req.body);
-    // console.log(req.body);
 
-    try {
-
-        student = await Student.findByIdAndUpdate(
-            req.body._id,
-            {
-                $set: req.body,
-            },
-            { new: true }
-        );
-        console.log(student);
-        res.status(200).json(savedStudent);
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
 router.post("/", async (req, res) => {
-    const newStudent = new Student(req.body);
+    const newResult = new Result(req.body);
 
     try {
-
-        const savedStudent = await newStudent.save();
-        res.status(200).json(savedStudent);
+        const savedResult = await newResult.save();
+        res.status(200).json(savedResult);
     } catch (err) {
         res.status(500).json(err);
     }
 });
-
-
 
 //UPDATE
 router.put("/:id", async (req, res) => {
     try {
-        const updatedStudent = await Student.findByIdAndUpdate(
+        const updatedResult = await Result.findByIdAndUpdate(
             req.params.id,
             {
                 $set: req.body,
             },
             { new: true }
         );
-        res.status(200).json(updatedStudent);
+        res.status(200).json(updatedResult);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -60,7 +39,7 @@ router.put("/:id", async (req, res) => {
 //DELETE
 router.delete("/:id", async (req, res) => {
     try {
-        await Student.findByIdAndDelete(req.params.id);
+        await Result.findByIdAndDelete(req.params.id);
         res.status(200).json("Product has been deleted...");
     } catch (err) {
         res.status(500).json(err);
@@ -71,8 +50,8 @@ router.delete("/:id", async (req, res) => {
 router.get("/find/:id", async (req, res) => {
     try {
         console.log('invoke here');
-        const student = await Student.findById(req.params.id);
-        res.status(200).json(student);
+        const result = await Result.findById(req.params.id);
+        res.status(200).json(result);
     } catch (err) {
         //sconsole.log('invoke here2222344');
         res.status(500).json(err);
@@ -87,18 +66,18 @@ router.get("/", async (req, res) => {
         let student;
 
         if (qNew) {
-            student = await Student.find().sort({ createdAt: -1 }).limit(1);
+            result = await Result.find().sort({ createdAt: -1 }).limit(1);
         } else if (qCategory) {
-            student = await Student.find({
+            result = await Result.find({
                 categories: {
                     $in: [qCategory],
                 },
             });
         } else {
-            student = await Student.find();
+            result = await Result.find();
         }
 
-        res.status(200).json(student);
+        res.status(200).json(result);
     } catch (err) {
         res.status(500).json(err);
     }

@@ -14,7 +14,7 @@ const StudentSchema = new mongoose.Schema(
                 R_date: {
                     type: Date,
                 },
-                courses: { type: Object, required: true }
+                course: { type: Object, required: true }
             },
 
         ],
