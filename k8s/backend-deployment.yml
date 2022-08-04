@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: backend-of-university-management
-          image: purbo75/backend-of-university-management:latest
+          image: purbo75/management
           ports:
             - containerPort: 5000
