@@ -22,7 +22,7 @@ router.post("/addCourse", async (req, res) => {
             { new: true }
         );
         console.log(student);
-        res.status(200).json(savedStudent);
+        res.status(200).json(student);
     } catch (err) {
         res.status(500).json(err);
     }
