@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const cors = require("cors");
 
 const courseRoute = require("./routes/CourcesManagement");
+const studentRoute = require("./routes/StudentManagement");
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ mongoose.connect('mongodb+srv://purbo:purbo@cluster0.qgh5q.mongodb.net/?retryWri
 app.use(cors());
 app.use(express.json());
 app.use("/api/course", courseRoute);
+app.use("/api/student", studentRoute);
 
 app.listen(5000, () => {
     console.log("Server is running on port 5000");

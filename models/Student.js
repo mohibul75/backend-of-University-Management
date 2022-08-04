@@ -6,7 +6,7 @@ const StudentSchema = new mongoose.Schema(
         name: { type: String, required: true },
         gender: { type: String, required: true },
         year: { type: Number, required: true },
-        cources: [
+        course: [
             {
                 approval: {
                     type: Boolean,
@@ -14,7 +14,7 @@ const StudentSchema = new mongoose.Schema(
                 R_date: {
                     type: Date,
                 },
-                cources: { type: Object, required: true }
+                courses: { type: Object, required: true }
             },
 
         ],
@@ -22,4 +22,4 @@ const StudentSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-module.exports = mongoose.model("Cart", StudentSchema);
+module.exports = mongoose.model("Student", StudentSchema);
