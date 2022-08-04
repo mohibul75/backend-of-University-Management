@@ -58,7 +58,6 @@ jobs:
         uses: Azure/k8s-deploy@v1
         with:
           manifests: |
-
             k8s/backend-deployment.yml
             k8s/backend-service.yml
           images: ${{secrets.DOCKER_USERNAME}}/backend-of-University-Management:${{github.sha}}
