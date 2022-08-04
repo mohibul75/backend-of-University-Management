@@ -43,16 +43,6 @@ jobs:
           cluster-name: testcluster
           resource-group: TEST
 
-      # Create K8s secrets to pull images
-      - name: Create secret in Kubernetes cluster
-        uses: Azure/k8s-create-secret@v1.1
-        with:
-          container-registry-url: https://hub.docker.com/repository/docker/purbo75/backend_of_university_management
-          container-registry-username: "${{secrets.DOCKER_USERNAME}}"
-          container-registry-password: "${{secrets.DOCKER_PASSWORD}}"
-          secret-type: docker-registry
-          secret-name: docker-image-pull-secret
-
         # Deploy to k8s cluster
       - name: Deploy to Kubernetes cluster
         uses: Azure/k8s-deploy@v1
