@@ -51,4 +51,5 @@ jobs:
             k8s/backend-deployment.yml
             k8s/backend-service.yml
             k8s/ingress-service.yml
+          images: ${{secrets.DOCKER_USERNAME}}/backend_of_university_management:latest
           action: deploy
