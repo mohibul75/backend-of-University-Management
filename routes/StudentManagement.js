@@ -10,7 +10,7 @@ const router = require("express").Router();
 //CREATE
 router.post("/addCourse", async (req, res) => {
     const newStudent = new Student(req.body);
-    // console.log(req.body);
+    console.log(req.body);
 
     try {
 
