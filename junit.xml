@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="2" failures="0" errors="0" time="1.766">
+  <testsuite name="Rest Api Testing " errors="0" failures="0" skipped="0" timestamp="2022-08-05T01:18:04" time="1.515" tests="2">
+    <testcase classname="Rest Api Testing  get Course" name="Rest Api Testing  get Course" time="0.23">
+    </testcase>
+    <testcase classname="Rest Api Testing  add Course" name="Rest Api Testing  add Course" time="0.187">
+    </testcase>
+  </testsuite>
+</testsuites>
